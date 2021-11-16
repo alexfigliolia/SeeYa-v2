@@ -1,0 +1,30 @@
+@import "Styles/Variables";
+
+.base-input {
+  @include center;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 10px auto;
+  & > label,
+  & > input {
+    box-sizing: border-box;
+  }
+  & > label {
+    height: 25px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  & > div {
+    width: 100%;
+    & > input {
+      width: 100%;
+      outline: none;
+      border: none;
+      height: 45px;
+      border-radius: 2.5px;
+      padding: 0 15px;
+      box-sizing: border-box;
+    }
+  }
+}

@@ -1,0 +1,47 @@
+.state-button {
+  position: relative;
+  & > .circle-loader,
+  & > .check,
+  & > .x {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    transform: scale(0);
+    transition: visibility 0s 0.3s, transform 0.3s;
+  }
+  &.loading {
+    color: transparent;
+    & > .circle-loader {
+      visibility: visible;
+      transform: scale(1);
+      transition: visibility 0s 0s, transform 0.3s;
+    }
+  }
+  &.success {
+    color: transparent;
+    & > .circle-loader {
+      visibility: hidden;
+      transform: scale(0);
+      transition: visibility 0s 0.3s, transform 0.3s;
+    }
+    & > .check {
+      visibility: visible;
+      transform: scale(1);
+      transition: visibility 0s 0s, transform 0.3s 0.3s;
+    }
+  }
+  &.error {
+    color: transparent;
+    & > .circle-loader {
+      visibility: hidden;
+      transform: scale(0);
+      transition: visibility 0s 0.3s, transform 0.3s;
+    }
+    & > .x {
+      visibility: visible;
+      transform: scale(1);
+      transition: visibility 0s 0s, transform 0.3s 0.3s;
+    }
+  }
+}
