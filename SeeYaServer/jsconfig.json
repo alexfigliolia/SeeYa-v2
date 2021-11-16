@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "Graph/*": [
+        "./Graph/*"
+      ],
+      "Listeners": [
+        "./Listeners.js"
+      ],
+      "Database/*": [
+        "./Database/*"
+      ],
+      "Logger/*": [
+        "./Logger/*"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "**/node_modules/*"
+  ]
+}
