@@ -36,4 +36,10 @@ export default class AuthHelpers {
   static storeToken({ token }) {
     localStorage.setItem('accessToken', token);
   }
+
+  static logout(history) {
+    localStorage.removeItem('accessToken');
+    dispatch({ type: 'LOGOUT' });
+    history.push('/');
+  }
 }

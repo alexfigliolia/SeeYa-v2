@@ -1,0 +1,7 @@
+@import "Styles/Variables";
+
+.user-profile {
+  & > .username {
+    margin-top: 75px;
+  }
+}

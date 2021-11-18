@@ -1,0 +1,18 @@
+@import "Styles/Variables";
+
+.username {
+  width: 100%;
+  @include center;
+  & > p {
+    font-size: 1.4em;
+    font-weight: 500;
+  }
+  & > .verified {
+    height: 30px;
+    width: 30px;
+    margin-left: 5px;
+    & path {
+      fill: $RED;
+    }
+  }
+}

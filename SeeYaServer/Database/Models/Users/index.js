@@ -42,6 +42,7 @@ export default class User extends Model {
       },
       {
         sequelize: DB,
+        freezeTableName: true,
         tableName: 'users',
         updatedAt: 'updated_at',
         createdAt: 'created_at',
@@ -74,13 +75,29 @@ export default class User extends Model {
   static associate(DB) {
     User.belongsToMany(DB.User, {
       as: 'friends',
-      foreignKey: 'user_id',
+      foreignKey: {
+        name: 'user_id',
+        allowNull: false
+      },
       through: DB.Friendship
     });
     User.belongsToMany(DB.User, {
       as: 'userFriends',
-      foreignKey: 'friend_id',
+      foreignKey: {
+        name: 'friend_id',
+        allowNull: false
+      },
       through: DB.Friendship
+    });
+    User.hasMany(DB.UserImage, {
+      as: 'images',
+      onDelete: 'cascade',
+      hooks: true,
+      constraints: false,
+      foreignKey: {
+        name: 'user_id',
+        allowNull: false,
+      }
     });
   }
   validPassword(password) {
@@ -100,6 +117,19 @@ export default class User extends Model {
       return { valid: false, message: 'Your password should contain at least one number' };
     }
     return { valid: true };
+  }
+  static validateName(name) {
+    return (
+      typeof name === 'string' &&
+      name.length >= 4 &&
+      name.indexOf(' ') !== -1
+    );
+  }
+  static validateImage(url) {
+    return (
+      typeof url === 'string' &&
+      true
+    );
   }
   static async getUserByID(id) {
     return await User.findByPk(id);

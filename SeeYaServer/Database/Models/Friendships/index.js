@@ -15,7 +15,7 @@ export default class Friendship extends Model {
           type: DataTypes.UUID,
           allowNull: false,
           references: {
-            model: 'Users',
+            model: 'users',
             key: 'id'
           }
         },
@@ -23,7 +23,7 @@ export default class Friendship extends Model {
           type: DataTypes.UUID,
           allowNull: false,
           references: {
-            model: 'Users',
+            model: 'users',
             key: 'id'
           }
         },

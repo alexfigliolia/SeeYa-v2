@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import Debounce from 'lodash.debounce';
 import { resizeWindow } from 'Actions/Screen';
 

@@ -57,6 +57,10 @@ const Authentication = (state = initialState, action) => {
       return Object.assign({}, state, { fadeLogin: true });
     case 'CHECKED_AUTH_STATE':
       return Object.assign({}, state, { checkedAuthState: true });
+    case 'UPDATE_USER_OBJECT':
+      return Object.assign({}, state, { user: action.user });
+    case 'LOGOUT':
+      return Object.assign({}, initialState, { checkedAuthState: true });
     default:
       return state;
   }

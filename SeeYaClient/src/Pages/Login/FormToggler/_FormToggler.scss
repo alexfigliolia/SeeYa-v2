@@ -35,6 +35,9 @@
       &:not(.active) {
         color: #fc315d;
         font-weight: 500;
+        &.focus-visible {
+          background-color: $LIGHT_FOCUS_GRAY;
+        }
       }
     }
     & > .highlighter {

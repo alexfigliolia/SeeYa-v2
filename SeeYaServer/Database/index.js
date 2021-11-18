@@ -37,13 +37,15 @@ for (let i = 0; i < length; i++) {
   }
 }
 
+Logger.log(['blue', 'bold'], '\n   » Attaching models');
+
 Object.keys(DB).forEach(modelName => {
   if (DB[modelName].associate) {
     DB[modelName].associate(DB);
   }
 });
 
-Logger.log(['blue', 'bold'], '\n   » Attaching models');
+Logger.log(['blue', 'bold'], '\n   » Creating associations');
 
 DB.sequelize = sequelize;
 DB.Sequelize = Sequelize;
@@ -54,7 +56,10 @@ DB.Sequelize = Sequelize;
     Logger.log(['blue', 'bold'], '\n» Database connection verified!\n');
     try {
       Logger.log(['blue', 'bold'], '   » Looking for Trigram extension\n');
-      await DB.sequelize.query("SELECT * FROM pg_extension WHERE extname='pg_trgm';");
+      const [TG] = await DB.sequelize.query("SELECT * FROM pg_extension WHERE extname='pg_trgm';");
+      if (!TG.length) {
+        throw new Error('Missing trigram extension');
+      }
       Logger.log(['blue', 'bold'], '\n   » Trigram extension found!\n');
     } catch (error) {
       Logger.log(['blue', 'bold'], "   » Trigram extension doesn't exist. Attempting to install\n");
@@ -67,9 +72,30 @@ DB.Sequelize = Sequelize;
       }
     }
     Logger.log(['blue', 'bold'], '   » Initializing tables\n');
-    // await DB.User.sync();
-    Logger.log(['blue', 'bold'], '   » Initializing tables\n');
-    await DB.Friendship.sync();
+    try {
+      Logger.log(['blue', 'bold'], '      » Syncing Users\n');
+      await DB.User.sync({ logging: console.log });
+    } catch (error) {
+      Logger.log(['red', 'bold'], '\n   » User table setup failed\n');
+      console.log(error);
+      throw new Error(error);
+    }
+    try {
+      Logger.log(['blue', 'bold'], '\n      » Syncing Friendships\n');
+      await DB.Friendship.sync({ logging: console.log });
+    } catch (error) {
+      Logger.log(['red', 'bold'], '\n   » Friendship table setup failed\n');
+      console.log(error);
+      throw new Error(error);
+    }
+    try {
+      Logger.log(['blue', 'bold'], '\n      » Syncing User Images\n');
+      await DB.UserImage.sync({ logging: console.log });
+    } catch (error) {
+      Logger.log(['red', 'bold'], '\n   » User image table setup failed\n');
+      console.log(error);
+      throw new Error(error);
+    }
     Logger.log(['blue', 'bold'], '\n   » Tables are good!\n');
     Logger.log(['magenta', 'bold'], '\nOff to the races! 🎉 \n');
   } catch (error) {

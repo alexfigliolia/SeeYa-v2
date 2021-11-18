@@ -42,6 +42,7 @@ export default class FormToggler extends Component {
                 <button
                   key={button}
                   style={{ width }}
+                  disabled={active === i}
                   onClick={this.onClick(i)}
                   className={`ft-button${active === i ? ' active' : ''}`}>{button}</button>
               );

@@ -1,0 +1,9 @@
+@import "Styles/Variables";
+
+.page {
+  width: 100%;
+  margin-top: 50px;
+  @media #{$mq-670} {
+    margin-top: 70px;
+  }
+}

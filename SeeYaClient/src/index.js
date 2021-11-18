@@ -2,13 +2,18 @@
 import 'Styles/index.scss';
 import 'focus-visible';
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM, { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import Store from './Store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Auth from 'Services/Auth/AuthStatus';
+
+if (process.env.NODE_ENV !== 'production') {
+  const axe = require('@axe-core/react');
+  axe(React, ReactDOM, 1000);
+}
 
 Auth.checkStatus();
 

@@ -13,6 +13,12 @@
       ],
       "Logger/*": [
         "./Logger/*"
+      ],
+      "Routes/*": [
+        "./Routes/*"
+      ],
+      "Middleware/*": [
+        "./Middleware/*"
       ]
     }
   },

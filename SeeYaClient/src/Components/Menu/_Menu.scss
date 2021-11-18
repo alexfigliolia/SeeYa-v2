@@ -1,0 +1,142 @@
+@import "Styles/Variables";
+
+.mobile-menu {
+  height: calc(100vh - 50px);
+  width: 100%;
+  position: fixed;
+  top: 50px;
+  right: 0;
+  @include gradient;
+  box-shadow: -5px 0px 10px rgba(#000, 0.2);
+  z-index: 100;
+  max-width: 500px;
+  transform: scaleX(0);
+  transform-origin: 100% 50%;
+  visibility: hidden;
+  transition: visibility 0s 0.4s, transform 0.3s 0.1s;
+  @media #{$mq-670} {
+    top: 70px;
+    height: calc(100vh - 70px);
+  }
+  &.open {
+    transform: scaleX(1);
+    visibility: visible;
+    transition: visibility 0s 0s, transform 0.3s;
+    & > div {
+      & > .username,
+      & > .avatar,
+      & > .nav-link,
+      & > .logout {
+        transform: translateX(0px);
+        opacity: 1;
+        transition: all 0.4s 0.15s;
+      }
+    }
+  }
+  & > div {
+    flex-direction: column;
+    width: 90%;
+    font-size: 1.3em;
+    margin: auto;
+    @include center;
+    justify-content: flex-start;
+    @media #{$mq-670} {
+      font-size: 1.5em;
+    }
+    & > .username {
+      margin-bottom: 30px;
+      & > p {
+        margin: 0;
+        color: #fff;
+        font-size: 1.2em;
+      }
+      & > .verified path {
+        fill: #fff;
+      }
+    }
+    & > .username,
+    & > .avatar,
+    & > .nav-link,
+    & > .logout {
+      transform: translateX(50px);
+      opacity: 0;
+      transition: all 0.3s 0s;
+    }
+    & > .avatar {
+      height: 200px;
+      width: 200px;
+      margin-top: 50px;
+      margin-bottom: 20px;
+      border: 2px solid #fff;
+      box-shadow: 0px 5px 10px rgba(#000, 0.25);
+      @media #{$mq-670} {
+        margin-top: 40px;
+        margin-bottom: 30px;
+      }
+      & > img,
+      & > svg {
+        width: 100%;
+        height: auto;
+      }
+      & > svg {
+        height: 100%;
+      }
+    }
+    & > .nav-link,
+    & > .logout {
+      margin: 20px auto;
+      border: none;
+      outline: none;
+      @media #{$mq-670} {
+        margin: 25px auto;
+      }
+    }
+    & > .nav-link {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      text-transform: uppercase;
+      position: relative;
+      &:hover::after,
+      &.active::after,
+      &.focus-visible::after {
+        transform: scaleX(1);
+      }
+      &::after {
+        content: "";
+        background-color: #fff;
+        height: 3px;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        border-radius: 1.5px;
+        transform-origin: 50% 50%;
+        transform: scaleX(0);
+        transition-duration: 0.2s;
+      }
+    }
+    & > .logout {
+      padding: 0;
+      background-color: #fff;
+      color: $RED;
+      height: 40px;
+      width: 90%;
+      max-width: 300px;
+      border-radius: 2.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      box-shadow: 0px 2.5px 5px rgba(#000, 0.2);
+      transition-duration: 0.3s;
+      @media #{$mq-670} {
+        height: 45px;
+        max-width: 350px;
+      }
+      &:hover,
+      &.focus-visible {
+        transform: translateY(-2px);
+        box-shadow: 0px 5px 7.5px rgba(#000, 0.2);
+      }
+    }
+  }
+}

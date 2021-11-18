@@ -1,0 +1,66 @@
+@import "Styles/Variables";
+
+.profile-background {
+  height: 250px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  & > .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    @include gradient;
+    // TODO - add image
+  }
+  & > .avatar {
+    position: absolute;
+    top: calc(100% - 75px);
+    left: calc(50% - 75px);
+    height: 150px;
+    width: 150px;
+    border: 2px solid #fff;
+    z-index: 1;
+    background-color: #fff;
+    & > svg {
+      height: 100%;
+      width: 100%;
+    }
+  }
+  & > .photo-upload {
+    position: absolute;
+    bottom: 0px;
+    right: 10px;
+    height: 45px;
+    width: 45px;
+    outline: none;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    @include center;
+    color: #fff;
+    overflow: hidden;
+    cursor: pointer;
+    &:hover > svg,
+    &.focus-visible > svg {
+      opacity: 0.75;
+    }
+    & > input,
+    & > svg {
+      height: 45px;
+      width: 45px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    & > input {
+      opacity: 0;
+      z-index: 2;
+    }
+    & > svg {
+      fill: #fff;
+      transition-duration: 0.3s;
+    }
+  }
+}

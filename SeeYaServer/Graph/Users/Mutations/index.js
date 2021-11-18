@@ -1,9 +1,11 @@
-import CreateAccount from 'Graph/Users/Mutations/CreateAccount';
-import Login from 'Graph/Users/Mutations/Login';
-import CheckAuthStatus from 'Graph/Users/Mutations/CheckAuthStatus';
+import CreateAccount from './CreateAccount';
+import Login from './Login';
+import CheckAuthStatus from './CheckAuthStatus';
+import UpdateUser from './UpdateUser';
 
 export default {
   CreateAccount,
   Login,
-  CheckAuthStatus
+  CheckAuthStatus,
+  UpdateUser
 }

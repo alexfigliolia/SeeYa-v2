@@ -90,7 +90,7 @@ class SignUp extends Component {
           onChange={this.onChange('password')} />
         <StateButton
           className='login-submit'
-          text='LOGIN'
+          text='SIGN UP'
           attributes={{
             onClick: this.signUp
           }}

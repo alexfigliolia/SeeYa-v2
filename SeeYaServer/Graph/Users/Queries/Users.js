@@ -1,5 +1,5 @@
 
-import { GraphQLBoolean, GraphQLEnumType, GraphQLInt, GraphQLString } from 'graphql';
+import { GraphQLEnumType, GraphQLInt, GraphQLString } from 'graphql';
 import { connectionArgs, connectionDefinitions, connectionFromPromisedArray } from 'graphql-relay';
 import DB from 'Database';
 import UserType from 'Graph/Users/Type';

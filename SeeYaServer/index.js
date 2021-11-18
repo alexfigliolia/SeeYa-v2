@@ -4,12 +4,14 @@ import cors from 'cors';
 import Graph from 'Graph';
 import Listeners from 'Listeners';
 import Logger from 'Logger';
+import Routes from 'Routes';
+import Authentication from 'Middleware/Authentication';
 
 require('dotenv').config();
 Listeners();
 
 const PORT = process.env.PORT || 3001;
-
+const IS_DEV = process.env.NODE_ENV === 'development';
 const App = Express();
 
 App.use(json());
@@ -18,12 +20,14 @@ App.use(cors({
   optionsSuccessStatus: 200
 }));
 
+App.use('/api', Authentication, Routes);
+
 App.use('/graphql', (req, res) => {
   graphqlHTTP({
     schema: Graph,
-    graphiql: true,
+    graphiql: IS_DEV,
     context: { req },
-    pretty: process.env.NODE_ENV === 'development',
+    pretty: IS_DEV,
     customFormatErrorFn: error => {
       // console.log('\n\n\n\n\n', 'CUSTOM ERROR', JSON.stringify(error));
       return {
