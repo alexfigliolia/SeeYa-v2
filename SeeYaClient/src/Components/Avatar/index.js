@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import ResizeObserver from 'HOCs/ResizeObserver';
 import './_Avatar.scss';
@@ -6,10 +6,13 @@ import './_Avatar.scss';
 class Avatar extends Component {
   constructor(props) {
     super(props);
-    this.state = { source: null };
+    this.state = { source: null, ready: false };
     this.timer = null;
     this.width = 0;
+    this.image = null;
     this.resize = this.resize.bind(this);
+    this.setImg = this.setImg.bind(this);
+    this.onImageLoaded = this.onImageLoaded.bind(this);
   }
 
   static defaultProps = {
@@ -17,9 +20,16 @@ class Avatar extends Component {
     image: '',
   }
 
-  shouldComponentUpdate({ image }, { source }) {
+  componentDidMount() {
+    if (this.image && this.image.complete) {
+      this.setState({ ready: true });
+    }
+  }
+
+  shouldComponentUpdate({ image }, { source, ready }) {
     if (image !== this.props.image) return true;
-    else if (source !== this.props.source) return true;
+    else if (source !== this.state.source) return true;
+    else if (ready !== this.state.ready) return true;
     return false;
   }
 
@@ -53,19 +63,41 @@ class Avatar extends Component {
     this.setState({ source: `${token1}/upload/ar_1.0,c_fill,w_${this.width}/${token2}` });
   }
 
+  setImg(c) {
+    this.image = c;
+  }
+
+  onImageLoaded() {
+    if (!this.state.ready) {
+      this.setState({ ready: true });
+    }
+  }
+
+  getAvatar() {
+    const { source, ready } = this.state;
+    return (
+      <Fragment>
+        <div className={`avatar-skeleton${ready ? ' ready' : ''}`} />
+        <ResizeObserver
+          Tag='img'
+          attributes={{
+            src: source,
+            alt: 'User',
+            onLoad: this.onImageLoaded
+          }}
+          setRef={this.setImg}
+          resize={this.resize} />
+      </Fragment>
+    );
+  }
+
   render() {
     const { image, fill } = this.props;
     return (
       <div className='avatar'>
         {
           !!image ?
-            <ResizeObserver
-              Tag='img'
-              attributes={{
-                src: this.state.source,
-                alt: 'User'
-              }}
-              resize={this.resize} />
+            this.getAvatar()
             :
             <svg
               xmlns='http://www.w3.org/2000/svg'

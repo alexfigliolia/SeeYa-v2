@@ -1,6 +1,7 @@
 @import "Styles/Variables";
 
 .user-profile {
+  min-height: 100vh;
   & > .username {
     margin-top: 75px;
   }

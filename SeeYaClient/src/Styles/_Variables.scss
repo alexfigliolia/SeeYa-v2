@@ -2,6 +2,11 @@
 $RED: #fc315d;
 $BLACK: rgb(39, 39, 39);
 $LIGHT_FOCUS_GRAY: #ededed;
+
+:export {
+  RED: $RED;
+}
+
 /*======MEDIA QUERIES======*/
 $mq-375: "(min-width: 375px)";
 $mq-410: "(min-width: 410px)";

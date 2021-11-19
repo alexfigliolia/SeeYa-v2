@@ -6,7 +6,8 @@ import './_Background.scss';
 export default class Background extends Component {
   constructor(props) {
     super(props);
-    this.image = null;
+    this.input = null;
+    this.setInput = this.setInput.bind(this);
     this.onChange = this.onChange.bind(this);
   }
 
@@ -24,7 +25,14 @@ export default class Background extends Component {
     const { files } = e.target;
     if (files.length && files[0]) {
       ImageUpload.upload(files[0]);
+      if (this.input) {
+        this.input.value = '';
+      }
     }
+  }
+
+  setInput(c) {
+    this.input = c;
   }
 
   render() {
@@ -49,6 +57,7 @@ export default class Background extends Component {
             <path d='M28.2843 63.4316H14.4634V66.2328H28.2843V63.4316Z' />
           </svg>
           <input
+            ref={this.setInput}
             type='file'
             name='img'
             accept='image/*'

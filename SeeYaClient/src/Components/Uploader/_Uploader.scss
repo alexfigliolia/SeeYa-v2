@@ -1,0 +1,104 @@
+@import "Styles/Variables";
+
+.uploader {
+  width: 90%;
+  max-width: 450px;
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  min-height: 150px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-sizing: border-box;
+  padding: 20px;
+  color: lighten($BLACK, 15);
+  box-shadow: 0px 5px 10px rgba(#000, 0.225);
+  visibility: hidden;
+  opacity: 0;
+  transform: translateX(75px);
+  transition: visibility 0s 0.4s, opacity 0.4s, transform 0.4s;
+  &.visible {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0px);
+    transition: visibility 0s 0s, opacity 0.4s, transform 0.4s;
+  }
+  & > .u-title {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.35em;
+    color: lighten($BLACK, 15);
+  }
+  & > .u-subtitle {
+    font-weight: 500;
+    font-size: 0.95em;
+    margin-top: 10px;
+    color: lighten($BLACK, 40);
+  }
+  & > .u-progress {
+    position: relative;
+    margin-top: 20px;
+    & > .progress-bar {
+      box-shadow: 0px 2px 4px rgba(#000, 0.2);
+      & > .fill {
+        transition: width 0.5s;
+      }
+      &.success,
+      &.error {
+        width: 40px;
+        height: 40px;
+        @include gradient;
+        border-radius: 20px;
+        transition: width 0.5s 0s, height 0.2s 0.4s, border-radius 0.2s 0.4s, background 0.3s 0.4s;
+      }
+      &.success + .response-elements {
+        & > .response-text.success-text {
+          opacity: 1;
+          visibility: visible;
+          transform: translateX(0px);
+          transition: visibility 0s 0.6s, opacity 0.5s 0.6s, transform 0.5s 0.6s;
+        }
+        & > .response-icon.success-icon {
+          transform: scale(1);
+          visibility: visible;
+          transition: visibility 0s 0.6s, transform 0.5s 0.6s;
+        }
+      }
+      &.error + .response-elements {
+        & > .response-text.error-text {
+          opacity: 1;
+          visibility: visible;
+          transform: translateX(0px);
+          transition: visibility 0s 0.6s, opacity 0.5s 0.6s, transform 0.5s 0.6s;
+        }
+        & > .response-icon.error-icon {
+          transform: scale(1);
+          visibility: visible;
+          transition: visibility 0s 0.6s, transform 0.5s 0.6s;
+        }
+      }
+    }
+    & > .response-elements {
+      & > .response-text {
+        font-weight: 600;
+        color: #bebebe;
+        position: absolute;
+        top: 9px;
+        left: 50px;
+        font-size: 1.1em;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-20px);
+      }
+      & > .response-icon {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        height: 35px;
+        width: 35px;
+        transform: scale(0);
+        visibility: hidden;
+      }
+    }
+  }
+}

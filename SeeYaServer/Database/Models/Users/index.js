@@ -126,6 +126,7 @@ export default class User extends Model {
     );
   }
   static validateImage(url) {
+    // TODO - validate
     return (
       typeof url === 'string' &&
       true

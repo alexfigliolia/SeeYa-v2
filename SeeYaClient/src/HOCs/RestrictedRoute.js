@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { Route } from 'react-router-dom';
 import Login from 'Pages/Login';
 
-
-
 export default class RestrictedRoute extends Component {
 
   static defaultProps = {
