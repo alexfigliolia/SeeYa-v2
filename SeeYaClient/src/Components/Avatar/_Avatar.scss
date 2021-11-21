@@ -15,7 +15,7 @@
     opacity: 1;
     visibility: visible;
     border-radius: 50%;
-    background-image: linear-gradient(90deg, #ddd 0px, #e8e8e8 40px, #ddd 80px);
+    background-image: linear-gradient(90deg, rgb(238, 238, 238) 0px, #ffffff 40px, rgb(238, 238, 238) 80px);
     background-size: 180%;
     animation: avatarSkeleton 1.6s infinite linear;
     transition: visibility 0s 0s, opacity 0.3s;
